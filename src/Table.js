@@ -3,6 +3,7 @@ import Box from "./Box";
 import store from "./store/store";
 import { decrease, clear} from "./App";
 import { useState } from "react";
+import PathBuilder from "./pathFinder";
 
 function initArray(){
   let array=[];
@@ -24,12 +25,13 @@ function Table(){
   const clearing = () =>{
     setState(!state);
     clear();
+    map = initArray();
     store.dispatch({type: 3})
   }
-  
+
   const drawRow = (number,row) =>{
     return (<>
-    {row.map((elem,index)=>(<Box column={index} row={number}></Box>))}
+    {row.map((elem,index)=>(<Box row={index} column={number}></Box>))}
     </>)
     }
   
@@ -42,7 +44,9 @@ function Table(){
   
   const calculate = ()=>{
     //map=store.getState().value;
-    console.log(store.getState());
+    let calc= new PathBuilder(store.getState().table,store.getState().from,store.getState().to);
+    console.log(calc.findPath());
+    console.log(calc.array);
   }
 
   return(

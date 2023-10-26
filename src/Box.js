@@ -6,12 +6,12 @@ import reducer from "./store/reducer";
 function Box(props){
   const [state, setState] = React.useState(0);
   const addWall =()=>{
-    if (state!==2) {setState(1);
-    store.dispatch({type: 1, row:props.row, column:props.column, value: 1})}
+    if (state!==-1) {setState(1);
+    store.dispatch({type: 1, row:props.row, column:props.column, value: -2})}
   }
   const addEntryExit = ()=>{
-    setState(2);
-    store.dispatch({type: 2, row:props.row, column:props.column, value: 2})
+    setState(-1);
+    store.dispatch({type: 2, row:props.row, column:props.column, value: '*'})
   }
   const click = ()=>{
     return (fromTo>0)? addEntryExit() : addWall();
