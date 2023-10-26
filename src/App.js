@@ -1,7 +1,7 @@
 import './App.css';
-import Box from './Box';
 import Table from './Table';
 const N=100;
+
 let fromTo=2;
 let insideOfTable=[];
 for (let i=0; i<N*N; i++){
@@ -16,7 +16,6 @@ function App() {
       <header className="App-header">
         <Table></Table>
         
-        <button id="calculate">Calculate..</button>
 
     </header>
     </div>
