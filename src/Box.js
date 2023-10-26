@@ -11,7 +11,7 @@ function Box(props){
   }
   const addEntryExit = ()=>{
     setState(2);
-    store.dispatch({type: 1, row:props.row, column:props.column, value: 2})
+    store.dispatch({type: 2, row:props.row, column:props.column, value: 2})
   }
   const click = ()=>{
     return (fromTo>0)? addEntryExit() : addWall();

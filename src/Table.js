@@ -24,7 +24,9 @@ function Table(){
   const clearing = () =>{
     setState(!state);
     clear();
+    store.dispatch({type: 3})
   }
+  
   const drawRow = (number,row) =>{
     return (<>
     {row.map((elem,index)=>(<Box column={index} row={number}></Box>))}
