@@ -4,6 +4,7 @@ export default class PathBuilder{
     this.from=from;
     this.to=to;
   }
+    
   findPath(){
     let oldWave =[];
     let wave;
@@ -33,4 +34,39 @@ export default class PathBuilder{
   }
   return false;
 }
+  restorePath(){
+    if (!this.findPath()) return false;
+    let path=[];
+    const dx= [0,1,0,-1];
+    const dy= [1,0,-1,0];
+    let min=Infinity;
+    let row=0;
+    let col=0;
+    for (let d=0; d<4; d++){
+      let x=this.to.row+dx[d];
+      let y=this.to.column+dy[d];
+      if (x==this.from.column && y==this.from.row) return path;
+      if (x<this.array.length && y<this.array.length && x>=0 && y>=0 && this.array[x][y]>0){
+        if(min>this.array[x][y]) {
+          min=this.array[x][y];
+          row=x;
+          col=y;
+        }
+      }
+    }
+    path.push({row:row, col:col});
+    while (min>1){
+      let point=path[path.length-1];
+      for (let d=0; d<4; d++){
+        let x=point.row+dx[d];
+        let y=point.col+dy[d];
+        if (x<this.array.length && y<this.array.length && x>=0 && y>=0 && this.array[x][y]==min-1){
+          min--;
+          path.push({row:x,col:y});
+          continue;
+        }
+      }
+    }
+    return path;
+  }
 }

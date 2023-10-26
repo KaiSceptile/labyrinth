@@ -45,7 +45,7 @@ function Table(){
   const calculate = ()=>{
     //map=store.getState().value;
     let calc= new PathBuilder(store.getState().table,store.getState().from,store.getState().to);
-    console.log(calc.findPath());
+    console.log(calc.restorePath());
     console.log(calc.array);
   }
 
