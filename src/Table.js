@@ -81,9 +81,11 @@ function Table() {
         for (let elem of path) {
           currentMap[elem.row][elem.col] = "/";
         }
+      }
+      if (path) {
+        setTime(time);
         setMap(currentMap);
       }
-      if (path) setTime(time);
       setState(true);
     }
   };
