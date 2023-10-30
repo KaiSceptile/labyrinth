@@ -45,7 +45,7 @@ export default class PathBuilder{
     for (let d=0; d<4; d++){
       let x=this.to.row+dx[d];
       let y=this.to.column+dy[d];
-      if (x==this.from.column && y==this.from.row) return path;
+      if (x==this.from.row && y==this.from.column) return true;
       if (x<this.array.length && y<this.array.length && x>=0 && y>=0 && this.array[x][y]>0){
         if(min>this.array[x][y]) {
           min=this.array[x][y];

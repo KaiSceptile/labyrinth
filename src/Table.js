@@ -61,19 +61,18 @@ function Table(){
     if (!state){
     let currentMap=store.getState().table.slice(0);
     let time= Date.now();
-    console.log(time)
     let calc= new PathBuilder(store.getState().table,store.getState().from,store.getState().to);
     let path=calc.restorePath();
     time= Date.now() - time;
-    if (path!=false) {
+    console.log(path);
+    if (typeof (path)===typeof (map)) {
     for (let elem of path) {
       currentMap[elem.row][elem.col]='/';
     }
-    setState(true);
     setMap(currentMap);
-    setTime(time);
-    //alert("Spent time to built - "+time+" ms")
   }
+  if (path) setTime(time);
+  setState(true);
 }
   }
 
