@@ -9,15 +9,13 @@ function styleInit(value){
     case 0: return styles.free;
     case '*': return styles.start; 
     case -2: return styles.wall;
-    default: return styles.path;
+    case '/': return styles.path;
   }
 }
 
 function Box(props){
   const [state, setState] = React.useState(props.value);
   const [style, setStyle] = React.useState(styleInit(state));
-  //if (state!=0) setStyle(styles.path);
-  //setState();
   const addWall =()=>{
     if (state!=='*') {
     setState(-2);
@@ -32,7 +30,7 @@ function Box(props){
   const click = ()=>{
     return (fromTo>0)? addEntryExit() : addWall();
   }
-  return(<div class="box" style={style} onClick={click}>{state}</div>)
+  return(<div class="box" style={style} onClick={click}></div>)
 }
 
 Box.prototype.getType = function (type){
