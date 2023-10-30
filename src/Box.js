@@ -2,7 +2,6 @@ import React from "react";
 import { fromTo } from "./App";
 import store from "./store/store";
 import styles from "./box-style";
-import reducer from "./store/reducer";
 
 function styleInit(value){
   switch (value){
@@ -21,6 +20,10 @@ function Box(props){
     setState(-2);
     setStyle(styles.wall);
     store.dispatch({type: 1, row:props.row, column:props.column, value: -2})}
+    if (state=='-2') {
+      setState(0);
+      setStyle(styles.free);
+      store.dispatch({type: 1, row:props.row, column:props.column, value: 0})}
   }
   const addEntryExit = ()=>{
     setState('*');
@@ -31,10 +34,6 @@ function Box(props){
     return (fromTo>0)? addEntryExit() : addWall();
   }
   return(<div class="box" style={style} onClick={click}></div>)
-}
-
-Box.prototype.getType = function (type){
-  return this.state;
 }
 
 export default Box

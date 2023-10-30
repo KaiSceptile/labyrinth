@@ -4,6 +4,7 @@ import store from "./store/store";
 import { decrease, clear} from "./App";
 import { useState } from "react";
 import PathBuilder from "./pathFinder";
+import ModalWindow from "./Modal";
 
 function initArray(){
   let array=[];
@@ -21,10 +22,12 @@ function initArray(){
 function Table(){
   const [state, setState] = useState(false);
   const [map, setMap] = useState(initArray());
+  const [time, setTime] = useState(false);
   //let map = initArray();
 
   const clearing = () =>{
     setState(false);
+    setTime(false);
     clear();
     setMap(initArray());
     //map = ;
@@ -46,31 +49,42 @@ function Table(){
 
   const DrawResultTable=()=>{
   return (
+  <>
+  <ModalWindow time={time}></ModalWindow>
   <div class="table" onClick={clearing}>
   {map.map((elem,index) => drawRow(index,elem))}
-  </div>);
+  </div>
+  </>);
   }
 
   const calculate = ()=>{
+    if (!state){
     let currentMap=store.getState().table.slice(0);
-    console.log(currentMap);
+    let time= Date.now();
+    console.log(time)
     let calc= new PathBuilder(store.getState().table,store.getState().from,store.getState().to);
     let path=calc.restorePath();
+    time= Date.now() - time;
+    if (path!=false) {
     for (let elem of path) {
       currentMap[elem.row][elem.col]='/';
     }
     setState(true);
-    console.log(currentMap);
     setMap(currentMap);
+    setTime(time);
+    //alert("Spent time to built - "+time+" ms")
+  }
+}
   }
 
   return(
   <>
   {!state && <DrawTable/>}
   {state && <DrawResultTable/>}
-
+  <div class="button-panel">
   <button id="clear" onClick={clearing}>Clear</button>
   <button id="calculate" onClick={calculate}>Calculate..</button>
+  </div>
   </>
   )
 }
