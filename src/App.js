@@ -24,14 +24,6 @@ function App() {
 
 function clear(){
   fromTo=2;
-  for (let i=0; i<N*N; i++){
-    // for(let j=0; j<N; j++){
-        insideOfTable[i]=0;
-    // }
-    //  insideOfTable.push([]);
-    }
-  let table=document.querySelector(".table");
-
 }
 
 function decrease(){

@@ -20,22 +20,25 @@ function initArray(){
 
 function Table(){
   const [state, setState] = useState(false);
-  let map = initArray();
+  const [map, setMap] = useState(initArray());
+  //let map = initArray();
 
   const clearing = () =>{
-    setState(!state);
+    //setState(!state);
     clear();
-    map = initArray();
+    setMap(initArray());
+    //map = ;
     store.dispatch({type: 3})
   }
 
   const drawRow = (number,row) =>{
     return (<>
-    {row.map((elem,index)=>(<Box row={index} column={number}></Box>))}
+    {row.map((elem,index)=>(<Box row={number} column={index} value={elem}></Box>))}
     </>)
     }
   
   const DrawTable=()=>{
+    //console.log(map);
   return (
   <div class="table" onClick={decrease}>
   {map.map((elem,index) => drawRow(index,elem))}
@@ -43,10 +46,10 @@ function Table(){
   }
   
   const calculate = ()=>{
-    //map=store.getState().value;
     let calc= new PathBuilder(store.getState().table,store.getState().from,store.getState().to);
-    console.log(calc.restorePath());
-    console.log(calc.array);
+    calc.findPath();
+    //console.log(calc.array);
+    setMap(calc.array);
   }
 
   return(

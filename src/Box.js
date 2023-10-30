@@ -1,22 +1,38 @@
 import React from "react";
 import { fromTo } from "./App";
 import store from "./store/store";
+import styles from "./box-style";
 import reducer from "./store/reducer";
 
+function styleInit(value){
+  switch (value){
+    case 0: return styles.free;
+    case '*': return styles.start; 
+    case -2: return styles.wall;
+    default: return styles.path;
+  }
+}
+
 function Box(props){
-  const [state, setState] = React.useState(0);
+  const [state, setState] = React.useState(props.value);
+  const [style, setStyle] = React.useState(styleInit(state));
+  //if (state!=0) setStyle(styles.path);
+  //setState();
   const addWall =()=>{
-    if (state!==-1) {setState(1);
+    if (state!=='*') {
+    setState(-2);
+    setStyle(styles.wall);
     store.dispatch({type: 1, row:props.row, column:props.column, value: -2})}
   }
   const addEntryExit = ()=>{
-    setState(-1);
+    setState('*');
+    setStyle(styles.start);
     store.dispatch({type: 2, row:props.row, column:props.column, value: '*'})
   }
   const click = ()=>{
     return (fromTo>0)? addEntryExit() : addWall();
   }
-  return(<div class="box" onClick={click}>{state}</div>)
+  return(<div class="box" style={style} onClick={click}>{state}</div>)
 }
 
 Box.prototype.getType = function (type){

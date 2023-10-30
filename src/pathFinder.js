@@ -23,7 +23,7 @@ export default class PathBuilder{
         //console.log(oldWave[i]);
         let x=oldWave[i].row+dx[d];
         let y=oldWave[i].col+dy[d];
-        if (x==this.to.column && y==this.to.row) return true;
+        if (x==this.to.row && y==this.to.column) return true;
         if (x<this.array.length && y<this.array.length && x>=0 && y>=0 && this.array[x][y]==0){
           wave.push({col:y, row:x});
           this.array[x][y]=p;
