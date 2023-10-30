@@ -4,6 +4,9 @@ body{
 .table{
   display: grid;
   grid-template-rows: repeat(100, 1fr);
+}
+.row{
+  display: grid; 
   grid-template-columns: repeat(100, 1fr);
 }
 .box{
